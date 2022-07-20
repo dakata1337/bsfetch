@@ -20,8 +20,25 @@ pub fn print_info(prefix: &str, content: &str) {
     println!("\x1b[34;1m{}\x1b[0m: {}", prefix, content)
 }
 
+// NOTE: this can be improved
 pub fn format_uptime(secs: u64) -> String {
-    format!("\x1b[1;7m FIXME: implement something that works xd \x1b[0m")
+    let mut fmt = String::with_capacity(1024);
+
+    let days = secs / 60 / 60 / 24;
+    let hours = secs / 60 / 60 % 24;
+    let minutes = secs / 60 % 60;
+
+    if days != 0 {
+        fmt += &format!("{} days ", days);
+    }
+    if hours != 0 {
+        fmt += &format!("{} hours ", hours);
+    }
+    if minutes != 0 {
+        fmt += &format!("{} mins ", minutes);
+    }
+
+    fmt
 }
 
 fn main() {
@@ -55,12 +72,12 @@ fn main() {
             1 => println!("{}", format!("{:-^1$}", '-', seperator_len)),
             2 => print_info("OS", &format!("{} ({})", os_name, os_arch)),
             3 => print_info("Kernel", &kernel_ver),
-            4 => print_info("Uptime", &format_uptime(86460)),
+            4 => print_info("Uptime", &format_uptime(uptime)),
             5 => print_info("CPU", &format!("{} ({:.2}%)", cpu_brand, cpu_usage)),
             6 => print_info("Memory", &format!("{} MiB / {} MiB", used_mem, total_mem)),
             7 => {
                 let end = Instant::now();
-                print_info("Fetch speed", format!("{:?}", end - start).as_str());
+                print_info("Fetch speed", format!("{:.3?}", end - start).as_str());
             }
             _ => println!(),
         }
