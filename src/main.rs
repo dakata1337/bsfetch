@@ -45,7 +45,7 @@ fn main() {
     let start = Instant::now();
     let mut sys = sysinfo::System::default();
 
-    let user = "daniel";
+    let user = std::env::var("USER").unwrap_or("hackerman".into());
     let hostname = sys.host_name().unwrap_or("localhost".into());
     let seperator_len = user.len() + hostname.len() + 1;
 
