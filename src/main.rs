@@ -2,17 +2,13 @@ use std::time::Instant;
 use sysinfo::{CpuExt, SystemExt};
 
 const LOGO: &'static [&str] = &[
-    "          #                ",
-    "            #  #           ",
-    "             #             ",
-    "            ###            ",
-    "            ###            ",
-    "            ###            ",
-    "            ###            ",
-    "         #########         ",
-    "         #########         ",
     "                           ",
     "                           ",
+    "      ##           ##      ",
+    "      ##           ##      ",
+    "                           ",
+    "                           ",
+    "        XXXXXXXXXXX        ",
     "                           ",
 ];
 
