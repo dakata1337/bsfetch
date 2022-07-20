@@ -44,7 +44,6 @@ pub fn format_uptime(secs: u64) -> String {
 fn main() {
     let start = Instant::now();
     let mut sys = sysinfo::System::default();
-    sys.refresh_all();
 
     let user = "daniel";
     let hostname = sys.host_name().unwrap_or("localhost".into());
@@ -55,6 +54,9 @@ fn main() {
     let kernel_ver = sys.kernel_version().unwrap_or("unknown".into());
 
     let uptime = sys.uptime();
+
+    sys.refresh_cpu();
+    sys.refresh_memory();
 
     let cpu = sys.global_cpu_info();
     let cpu_brand = cpu.brand();
